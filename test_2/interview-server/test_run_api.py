@@ -43,6 +43,13 @@ class TestRunApi(unittest.TestCase):
         exp = {'id': 1, 'values': [{'key': 'key1', 'val': 'val1', 'valType': 'str'}]}
         self.assertEqual(exp,act)
 
+    def test_create_10_object(self):
+        for i in range(10):
+            self.api.create_new_object()
+        act = len(self.api.get_list_of_polydata())
+        exp = 10
+        self.assertEqual(exp, act)
+
     def test_get_object_by_id_number(self):
         self.api.create_new_object()
         act = self.api.get_object_by_id_number(1)
