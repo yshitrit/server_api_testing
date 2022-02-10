@@ -3,9 +3,6 @@ import requests
 class api_run():
     def __init__(self , i_url , i_pload):
         self.basic_url = i_url
-        # Check if initial username & password are correct
-        if not i_pload['username'] == 'test' and i_pload['password'] == '1234':
-            raise KeyError("There is a problem with initial 'username' and 'password'!")
         self.pload = i_pload
         self.token = self.initial_connection_get_token()
         self.headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(self.token)}
@@ -18,7 +15,6 @@ class api_run():
     def initial_connection_get_token(self):
         endpoint = '/api/auth'
         r = requests.post(self.basic_url + endpoint, json = self.pload)
-        # print(r.text)
         if r.ok:
             r_dictionary = r.json()
             print("r_dictionary = {}".format(r_dictionary))

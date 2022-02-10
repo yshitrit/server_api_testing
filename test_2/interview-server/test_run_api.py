@@ -29,41 +29,64 @@ class TestRunApi(unittest.TestCase):
         self.process.kill()
 
     def test_get_list_of_polydata_empty_list(self):
-        lst = self.api.get_list_of_polydata()
-        self.assertEqual(lst,[])
+        print("...............................................")
+        print("test_get_list_of_polydata_empty_list")
+        act = self.api.get_list_of_polydata()
+        exp = []
+        self.assertEqual(exp , act)
+        print("...............................................")
+
 
     def test_get_list_of_polydata_list_not_empty(self):
+        print("...............................................")
+        print("test_get_list_of_polydata_list_not_empty")
         self.api.create_new_object()
         act = self.api.get_list_of_polydata()
         exp = [{'data': [{'key': 'key1', 'val': 'val1', 'valType': 'str'}], 'object_id': 1}]
         self.assertEqual(exp,act)
+        print("...............................................")
 
     def test_create_new_object(self):
+        print("...............................................")
+        print("test_create_new_object")
         act = self.api.create_new_object()
         exp = {'id': 1, 'values': [{'key': 'key1', 'val': 'val1', 'valType': 'str'}]}
         self.assertEqual(exp,act)
+        print("...............................................")
 
     def test_create_10_object(self):
+        print("...............................................")
+        print("test_create_10_object")
         for i in range(10):
             self.api.create_new_object()
         act = len(self.api.get_list_of_polydata())
         exp = 10
         self.assertEqual(exp, act)
+        print("...............................................")
 
     def test_get_object_by_id_number(self):
+        print("...............................................")
+        print("test_get_object_by_id_number")
         self.api.create_new_object()
         act = self.api.get_object_by_id_number(1)
         exp = {'object_id': 1, 'data': [{'key': 'key1', 'val': 'val1', 'valType': 'str'}]}
         self.assertEqual(exp,act)
+        print("...............................................")
 
     def test_delete_object_by_id_number_while_list_is_empty(self):
+        print("...............................................")
+        print("test_delete_object_by_id_number_while_list_is_empty")
         act = self.api.delete_object_by_id_number(1)
         exp = ''
         self.assertEqual(exp,act)
+        print("...............................................")
 
     def test_delete_object_by_id_number_while_list_is_not_empty(self):
+        print("...............................................")
+        print("test_delete_object_by_id_number_while_list_is_not_empty")
         self.api.create_new_object()
         self.api.delete_object_by_id_number(1)
         act = self.api.get_object_by_id_number(1)
         exp = {'error': 'Not Found', 'message': 'Resource with id 1 was not found'}
         self.assertEqual(exp,act)
+        print("...............................................")
